@@ -7,8 +7,8 @@ import lombok.ToString;
 
 @Getter 
 @Setter 
-@NoArgsConstructor
-//@ToString(includeFieldNames = false)
+//@NoArgsConstructor //this causes lombok @ToString to not work.
+@ToString
 public class Blog {
 	private Long id;
 	private String heading;
@@ -20,7 +20,7 @@ public class Blog {
 		this.content = content;
 	}
 	
-	public String toString() {
-		return "Blog (id: "+id+" heading: "+heading+" content: "+content+")";
-	}
+//	public String toString() {
+//		return "Blog (id: "+id+" heading: "+heading+" content: "+content+")";
+//	}
 }
