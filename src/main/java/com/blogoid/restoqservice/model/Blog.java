@@ -1,5 +1,7 @@
 package com.blogoid.restoqservice.model;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +11,12 @@ import lombok.ToString;
 @Setter 
 //@NoArgsConstructor //this causes lombok @ToString to not work.
 @ToString
-public class Blog {
+public class Blog implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5419278769466178796L;
+	
 	private Long id;
 	private String heading;
 	private String content;

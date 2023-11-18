@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blogoid.restoqservice.model.Blog;
 import com.blogoid.restoqservice.producer.QueueProducer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 public class MainAPI {
@@ -19,7 +20,7 @@ public class MainAPI {
 	QueueProducer producer;
 	
 	@PostMapping("/saveblog")
-	boolean saveBlog(@RequestBody Blog blog) {
+	boolean saveBlog(@RequestBody Blog blog) throws JsonProcessingException {
 		return producer.sendToQueue(blog);
 	}
 	
