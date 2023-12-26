@@ -1,6 +1,7 @@
 package com.blogoid.restoqservice.producer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,16 @@ public class QueueProducer {
 
 	@Scheduled(fixedDelay = 1000, initialDelay = 500)
 	public boolean sendToQueue(Blog blog) throws JsonProcessingException {
+		System.out.println("Started - sendToQueue");
 		ObjectMapper ow = new ObjectMapper();
+		template.setMessageConverter(new Jackson2JsonMessageConverter());
+		
 //				.writer().withDefaultPrettyPrinter();
 		String json = ow.writeValueAsString(blog);
-		this.template.convertAndSend(queue.getName(), json);
+		template.convertAndSend(queue.getName(), json);
+//		this.template.convertAndSend(queue.getName(), json);
         System.out.println(" [x] Sent '" + json + "'");
+        System.out.println("End - sendToQueue");
 		return true;
 	}
 
