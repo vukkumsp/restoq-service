@@ -11,8 +11,7 @@ import com.blogoid.restoqservice.model.Blog;
 import org.springframework.amqp.core.Queue;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper; 
-import com.fasterxml.jackson.databind.ObjectWriter; 
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -33,9 +32,9 @@ public class QueueProducer {
 		
 //				.writer().withDefaultPrettyPrinter();
 		String json = ow.writeValueAsString(blog);
-		template.convertAndSend(queue.getName(), json);
+		template.convertAndSend(queue.getName(), blog);
 //		this.template.convertAndSend(queue.getName(), json);
-        System.out.println(" [x] Sent '" + json + "'");
+        System.out.println(" [x] Sent '" + blog + "'");
         System.out.println("End - sendToQueue");
 		return true;
 	}
